@@ -11,49 +11,47 @@ import { AuthProvider } from "./Context/AuthContext";
 import Applications from "./Pages/MisPostulaciones/Applications";
 import LandingPage from "./Pages/LandingPage/LandingPage";
 import ProtectedUser from "./RouteProtection/ProtectedUser";
-import RedirectIfAuthenticated from "./RouteProtection/RedirectIfAuthenticated ";
 import MisOfertas from "./Pages/MisOfertas/MisOfertas";
 import CreateJobOfferPage from "./Pages/JobOffer/CreateJobOfferPage";
 import SingleJobOffer from "./Pages/JobOffer/SingleJobOffer";
-import ProtectedRecruiter from "./RouteProtection/ProtectedRecruiter";
 import Profile from "./Pages/Profile/Profile";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <RedirectIfAuthenticated> <LandingPage /> </RedirectIfAuthenticated>,
+    element: <LandingPage />,
   },
   {
     path: "/Login",
-    element: <RedirectIfAuthenticated> <Login /> </RedirectIfAuthenticated>,
+    element: <Login />,
   },
   {
     path: "/Registrarse",
-    element: <RedirectIfAuthenticated> <Register /></RedirectIfAuthenticated>,
+    element: <Register />,
   },
   {
     path: "/Home",
-    element: <ProtectedUser> <Home /> </ProtectedUser>,
+    element: <Home />,
   },
   {
     path: '/Postulaciones',
-    element:  <Applications/>
-  },  
+    element: <Applications />
+  },
   {
     path: '/MisOfertas',
-    element: <ProtectedRecruiter><MisOfertas/></ProtectedRecruiter> 
+    element: <MisOfertas />
   },
   {
     path: '/crear/oferta_trabajo',
-    element: <ProtectedRecruiter><CreateJobOfferPage /></ProtectedRecruiter>
+    element: <CreateJobOfferPage />
   },
   {
     path: '/MiPerfil/:ID_user',
-    element: <ProtectedUser><Profile/></ProtectedUser>
+    element: <Profile />
   },
   {
     path: '/ver/oferta_trabajo/:ID_offer',
-    element: <ProtectedUser> <SingleJobOffer /  > </ProtectedUser>
+    element: <SingleJobOffer />
   },
   {
     path: "*",

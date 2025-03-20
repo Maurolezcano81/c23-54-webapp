@@ -68,27 +68,44 @@ const CreateJobOfferPage = () => {
     const { getAllJobCategories } = jobCategoriesService()
     const { CreateJobOffer } = JobOffersService();
 
-    const [modalities, setModalities] = useState([]);
-    const [cities, setCities] = useState([]);
-    const [jobCategories, setJobCategories] = useState([]);
+    // const [modalities, setModalities] = useState([]);
+    // const [cities, setCities] = useState([]);
+    // const [jobCategories, setJobCategories] = useState([]);
 
-    useEffect(() => {
-        const getDataSelects = async () => {
+    // useEffect(() => {
+    //     const getDataSelects = async () => {
 
-            const modalitiesData = await getAllModalities()
-            setModalities(modalitiesData);
+    //         const modalitiesData = await getAllModalities()
+    //         setModalities(modalitiesData);
 
-            const citiesData = await getAllCities()
-            setCities(citiesData)
+    //         const citiesData = await getAllCities()
+    //         setCities(citiesData)
 
-            const jobCategoriesList = await getAllJobCategories()
-            setJobCategories(jobCategoriesList)
-        }
+    //         const jobCategoriesList = await getAllJobCategories()
+    //         setJobCategories(jobCategoriesList)
+    //     }
 
-        getDataSelects()
+    //     getDataSelects()
 
-    }, [])
+    // }, [])
 
+    const modalities = [
+        { ID_modality: 1, name: "Presencial" },
+        { ID_modality: 2, name: "Remoto" },
+        { ID_modality: 3, name: "Híbrido" }
+    ];
+    
+    const cities = [
+        { ID_city: 1, name: "Buenos Aires" },
+        { ID_city: 2, name: "Córdoba" },
+        { ID_city: 3, name: "Rosario" }
+    ];
+
+    const jobCategories = [
+        { ID_job_category: 1, name: "Desarrollo Web" },
+        { ID_job_category: 2, name: "Diseño UX/UI" },
+        { ID_job_category: 3, name: "Marketing Digital" }
+    ];
 
     const editor = useRef(null);
 

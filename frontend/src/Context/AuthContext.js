@@ -4,31 +4,30 @@ import { jwtDecode } from "jwt-decode";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-
-  const [Token, SetToken] = useState()
-  const [Name, SetName] = useState()
-  const [idUser, SetIdUser] = useState()
-  const [Role, SetRole] = useState(null);
+  const [Token, SetToken] = useState("hardcoded_token");
+  const [Name, SetName] = useState("John Doe");
+  const [idUser, SetIdUser] = useState(1);
+  const [Role, SetRole] = useState("admin");
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("Token");
-    if (storedToken) {
-      login(storedToken);
-    }
-  }, [])
+    login(Token);
+  }, []);
 
   const login = (token) => {
-    const decoded = jwtDecode(token);
-    const { id, name, role, exp } = decoded;
+    const decoded = {
+      id: 1,
+      name: "John Doe",
+      role: 1,
+      exp: Math.floor(Date.now() / 1000) + 60 * 60, // Expira en 1 hora
+    };
+
     localStorage.setItem("Token", token);
     SetToken(token);
-    SetIdUser(id);
-    SetName(name);
-    SetRole(role);
+    SetIdUser(decoded.id);
+    SetName(decoded.name);
+    SetRole(decoded.role);
 
-    
-    const expirationTime = exp * 1000 - Date.now();
-
+    const expirationTime = decoded.exp * 1000 - Date.now();
     if (expirationTime > 0) {
       setTimeout(() => {
         logout();
@@ -36,13 +35,12 @@ export const AuthProvider = ({ children }) => {
     } else {
       logout();
     }
+  };
 
-  }
   const logout = () => {
     localStorage.removeItem("Token");
-    localStorage.removeItem("FirstLogin");
-    SetToken(null)
-    window.location.href = '/'
+    SetToken(null);
+    window.location.href = "/";
   };
 
   return (
